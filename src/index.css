@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-bricolage: "Bricolage Grotesque", sans-serif;
+  --font-sans: "DM Sans", sans-serif;
+  --text-big: 3.25rem;
+  --color-neutral-900: rgb(3, 1, 45);
+  --color-neutral-800: rgb(39, 37, 65);
+  --color-neutral-700: rgb(49, 47, 75);
+  --color-neutral-600: rgb(61, 59, 94);
+  --color-neutral-300: rgb(174, 174, 183);
+  --color-neutral-200: rgb(213, 212, 217);
+  --color-neutral-0: rgb(255, 255, 255);
+
+  --color-orange-500: rgb(255, 124, 10);
+
+  --color-blue-500: rgb(68, 85, 218);
+  --color-blue-700: rgb(45, 28, 156);
+
+  --bg-redchung: rgb(255, 0, 0);
+}
