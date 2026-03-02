@@ -1,5 +1,9 @@
 function Main({ children }) {
-  return <div className="flex flex-col gap-8 lg:gap-12">{children}</div>;
+  return (
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 lg:gap-12">
+      {children}
+    </div>
+  );
 }
 
 export default Main;

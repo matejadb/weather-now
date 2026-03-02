@@ -1,6 +1,8 @@
 function Header({ children }) {
   return (
-    <header className="flex items-center justify-between">{children}</header>
+    <header className="mx-auto flex w-full max-w-7xl items-center justify-between">
+      {children}
+    </header>
   );
 }
 

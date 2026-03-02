@@ -4,7 +4,7 @@ function CurrentWeather({ weatherData }) {
   return (
     <div className="flex flex-col gap-5">
       {/* WEATHER INFO */}
-      <div className="flex flex-col gap-4 rounded-[20px] bg-[url('../../public/images/bg-today-small.svg')] bg-cover bg-center bg-no-repeat px-6 py-10">
+      <div className="flex flex-col gap-4 rounded-[20px] bg-[url('../../public/images/bg-today-small.svg')] bg-cover bg-center bg-no-repeat px-6 py-10 md:bg-[url('../../public/images/bg-today-large.svg')]">
         {/* LOCATION INFO */}
         <div className="flex flex-col items-center gap-3">
           <h1 className="text-neutral-0 font-sans text-[28px] leading-[1.2] font-bold">
