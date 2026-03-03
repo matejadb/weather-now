@@ -1,6 +1,6 @@
 import CurrentWeather from "./CurrentWeather";
 import DailyWeather from "./DailyWeather";
-import Dropdown from "./Dropdown";
+import DropdownUnits from "./DropdownUnits";
 import ForecastHourly from "./ForecastHourly";
 import ForecastMain from "../ui/ForecastMain";
 import Header from "./Header";
@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="flex flex-col gap-12 bg-neutral-900 px-4 pt-4 pb-12 md:px-6 md:pt-6 md:pb-20 lg:gap-16 lg:px-28 lg:pt-12">
       <Header>
-        <Dropdown />
+        <DropdownUnits />
       </Header>
 
       <Slogan />

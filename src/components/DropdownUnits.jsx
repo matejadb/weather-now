@@ -4,7 +4,7 @@ import iconArrowDown from "/images/icon-dropdown.svg";
 import MenuItem from "./MenuItem";
 import MenuGroup from "./MenuGroup";
 
-function Dropdown() {
+function DropdownUnits() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -53,4 +53,4 @@ function Dropdown() {
   );
 }
 
-export default Dropdown;
+export default DropdownUnits;

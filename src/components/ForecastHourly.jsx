@@ -1,4 +1,4 @@
-import Dropdown from "./Dropdown";
+import DropdownDays from "./DropdownDays";
 import HourlyWeatherCard from "./HourlyWeatherCard";
 
 function ForecastHourly() {
@@ -8,7 +8,7 @@ function ForecastHourly() {
         <h1 className="text-neutral-0 font-sans text-xl leading-[1.2] font-semibold">
           Hourly forecast
         </h1>
-        <Dropdown />
+        <DropdownDays />
       </div>
 
       <HourlyWeatherCard value="4 PM" temperature="20" />
