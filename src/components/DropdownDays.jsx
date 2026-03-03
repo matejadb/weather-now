@@ -1,17 +1,31 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import iconArrowDown from "/images/icon-dropdown.svg";
 import MenuItem from "./MenuItem";
-import MenuGroup from "./MenuGroup";
 
 function DropdownDays() {
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
 
   const toggleDropdown = () => {
     setIsOpen((isOpen) => !isOpen);
   };
 
+  useEffect(() => {
+    function callback(e) {
+      if (!ref.current?.contains(e.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("click", callback);
+
+    return () => {
+      document.removeEventListener("click", callback);
+    };
+  }, []);
+
   return (
-    <div className="relative inline-block text-left">
+    <div ref={ref} className="relative inline-block text-left">
       <div>
         <button
           onClick={toggleDropdown}
