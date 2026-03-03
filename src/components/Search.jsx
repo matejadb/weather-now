@@ -6,12 +6,12 @@ function Search() {
       <div className="relative flex-1">
         {/* <img className="absolute inline-block" src={searchIcon} /> */}
         <input
-          className="inline-block w-full rounded-xl bg-neutral-800 px-6 py-4 text-left font-sans text-xl leading-[1.2] font-medium text-neutral-200"
+          className="inline-block w-full rounded-xl bg-neutral-800 px-6 py-4 text-left font-sans text-xl leading-[1.2] font-medium text-neutral-200 transition-all duration-300 hover:cursor-pointer hover:bg-neutral-700 focus:ring-3 focus:ring-neutral-200 focus:ring-offset-3 focus:ring-offset-neutral-900 focus:outline-none"
           type="text"
           placeholder="Search for a place..."
         />
       </div>
-      <button className="text-neutral-0 rounded-xl bg-blue-500 px-6 py-4 font-sans text-xl leading-[1.2] font-medium">
+      <button className="text-neutral-0 rounded-xl bg-blue-500 px-6 py-4 font-sans text-xl leading-[1.2] font-medium transition-all duration-300 hover:cursor-pointer hover:bg-blue-700 focus:ring-3 focus:ring-blue-500 focus:ring-offset-3 focus:ring-offset-neutral-900 focus:outline-none">
         Search
       </button>
     </form>
