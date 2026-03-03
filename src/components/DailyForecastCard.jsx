@@ -1,4 +1,4 @@
-function DailyForecastContainer({ label, icon, min, max }) {
+function DailyForecastCard({ label, icon, min, max }) {
   return (
     <div className="text-neutral-0 flex flex-col items-center gap-4 rounded-xl border border-neutral-600 bg-neutral-800 px-2.5 py-4">
       <span className="font-sans text-[18px] leading-[1.2] font-medium">
@@ -18,4 +18,4 @@ function DailyForecastContainer({ label, icon, min, max }) {
   );
 }
 
-export default DailyForecastContainer;
+export default DailyForecastCard;

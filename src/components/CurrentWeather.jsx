@@ -1,4 +1,4 @@
-import WeatherDetailsContainer from "./WeatherDetailsContainer";
+import WeatherDetailsCard from "./WeatherDetailsCard";
 
 function CurrentWeather({ weatherData }) {
   return (
@@ -25,23 +25,19 @@ function CurrentWeather({ weatherData }) {
       </div>
 
       {/* WEATHER DETAILS */}
-      <div className="flex flex-wrap gap-4">
-        <WeatherDetailsContainer
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <WeatherDetailsCard
           label="Feels Like"
           value={weatherData.feelsLike}
           unit="°"
         />
-        <WeatherDetailsContainer
+        <WeatherDetailsCard
           label="Humidity"
           value={weatherData.humidity}
           unit="%"
         />
-        <WeatherDetailsContainer
-          label="Wind"
-          value={weatherData.wind}
-          unit="km/h"
-        />
-        <WeatherDetailsContainer
+        <WeatherDetailsCard label="Wind" value={weatherData.wind} unit="km/h" />
+        <WeatherDetailsCard
           label="Precipitation"
           value={weatherData.precipitation}
           unit="mm"

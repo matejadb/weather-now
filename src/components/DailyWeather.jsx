@@ -1,4 +1,4 @@
-import DailyForecastContainer from "./DailyForecastContainer";
+import DailyForecastCard from "./DailyForecastCard";
 
 function DailyWeather() {
   return (
@@ -8,44 +8,44 @@ function DailyWeather() {
       </h1>
 
       {/* FORECASTS */}
-      <div className="flex w-full flex-wrap items-center gap-4">
-        <DailyForecastContainer
+      <div className="grid grid-cols-3 items-center gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7">
+        <DailyForecastCard
           label="Tue"
           icon="/images/icon-rain.webp"
           min="14"
           max="20"
         />
-        <DailyForecastContainer
+        <DailyForecastCard
           label="Wed"
           icon="/images/icon-rain.webp"
           min="14"
           max="20"
         />
-        <DailyForecastContainer
+        <DailyForecastCard
           label="Thu"
           icon="/images/icon-rain.webp"
           min="14"
           max="20"
         />
-        <DailyForecastContainer
+        <DailyForecastCard
           label="Fri"
           icon="/images/icon-rain.webp"
           min="14"
           max="20"
         />
-        <DailyForecastContainer
+        <DailyForecastCard
           label="Sat"
           icon="/images/icon-rain.webp"
           min="14"
           max="20"
         />
-        <DailyForecastContainer
+        <DailyForecastCard
           label="Sun"
           icon="/images/icon-rain.webp"
           min="14"
           max="20"
         />
-        <DailyForecastContainer
+        <DailyForecastCard
           label="Mon"
           icon="/images/icon-rain.webp"
           min="14"

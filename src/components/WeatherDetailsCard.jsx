@@ -1,6 +1,6 @@
-function WeatherDetailsContainer({ label, value, unit }) {
+function WeatherDetailsCard({ label, value, unit }) {
   return (
-    <div className="flex w-40 grow flex-col gap-6 rounded-xl border border-solid border-neutral-600 bg-neutral-800 p-5">
+    <div className="flex w-full flex-col gap-6 rounded-xl border border-solid border-neutral-600 bg-neutral-800 p-5">
       <span className="font-sant text-[18px] leading-[1.2] font-medium text-neutral-200">
         {label}
       </span>
@@ -11,4 +11,4 @@ function WeatherDetailsContainer({ label, value, unit }) {
   );
 }
 
-export default WeatherDetailsContainer;
+export default WeatherDetailsCard;
