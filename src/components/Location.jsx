@@ -1,0 +1,14 @@
+function Location({ location, date }) {
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <h1 className="text-neutral-0 font-sans text-[28px] leading-[1.2] font-bold">
+        {location}
+      </h1>
+      <p className="text-neutral-0 font-sans text-[18px] leading-[1.2] font-medium opacity-80">
+        {date}
+      </p>
+    </div>
+  );
+}
+
+export default Location;

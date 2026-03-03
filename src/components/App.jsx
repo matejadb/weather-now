@@ -2,12 +2,12 @@ import CurrentWeather from "./CurrentWeather";
 import DailyWeather from "./DailyWeather";
 import Dropdown from "./Dropdown";
 import ForecastHourly from "./ForecastHourly";
-import ForecastMain from "./ForecastMain";
+import ForecastMain from "../ui/ForecastMain";
 import Header from "./Header";
-import Main from "./Main";
+import Main from "../ui/Main";
 import Search from "./Search";
-import Slogan from "./Slogan";
-import WeatherForecast from "./WeatherForecast";
+import Slogan from "../ui/Slogan";
+import WeatherForecast from "../ui/WeatherForecast";
 
 const weatherDataCurrent = {
   location: "Berlin, Germany",
