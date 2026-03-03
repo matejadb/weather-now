@@ -4,7 +4,7 @@ function CurrentWeather({ weatherData }) {
   return (
     <div className="flex flex-col gap-5">
       {/* WEATHER INFO */}
-      <div className="flex flex-col gap-4 rounded-[20px] bg-[url('../../public/images/bg-today-small.svg')] bg-cover bg-center bg-no-repeat px-6 py-10 md:bg-[url('../../public/images/bg-today-large.svg')]">
+      <div className="flex flex-col gap-4 rounded-[20px] bg-[url('/images/bg-today-small.svg')] bg-cover bg-center bg-no-repeat px-6 py-10 md:flex-row md:items-center md:justify-between md:bg-[url('/images/bg-today-large.svg')] md:py-20">
         {/* LOCATION INFO */}
         <div className="flex flex-col items-center gap-3">
           <h1 className="text-neutral-0 font-sans text-[28px] leading-[1.2] font-bold">
@@ -17,12 +17,8 @@ function CurrentWeather({ weatherData }) {
 
         {/* TEMP CONTAINER */}
         <div className="flex items-center justify-center gap-5">
-          <img
-            className="size-30"
-            src="../../public/images/icon-sunny.webp"
-            alt="icon"
-          />
-          <span className="text-neutral-0 font-sans text-[96px] leading-none font-semibold tracking-tight">
+          <img className="size-30" src="/images/icon-sunny.webp" alt="icon" />
+          <span className="text-neutral-0 font-sans text-[86px] leading-none font-semibold tracking-tight sm:text-8xl">
             {weatherData.temperature} &deg;
           </span>
         </div>

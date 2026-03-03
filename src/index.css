@@ -18,5 +18,5 @@
   --color-blue-500: rgb(68, 85, 218);
   --color-blue-700: rgb(45, 28, 156);
 
-  --bg-redchung: rgb(255, 0, 0);
+  --lg-grid-cols: 1fr 384px;
 }
