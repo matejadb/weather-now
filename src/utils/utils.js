@@ -53,7 +53,7 @@ export function getHourlyWeatherObjectArr(temp, time, weatherCode) {
 }
 
 export function formatTemperature(temp) {
-  if (!temp) return;
+  if (temp === null) return "";
 
   return Math.floor(temp);
 }
@@ -73,6 +73,21 @@ export function formatDate(date) {
     day: "numeric",
     year: "numeric",
   }).format(new Date(date));
+}
+
+export function formatTime(time) {
+  const [hours, minutes] = time.split("T")[1].split(":");
+
+  const date = new Date();
+  date.setHours(hours, minutes);
+
+  const formattedTime = date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+
+    hour12: true,
+  });
+
+  return formattedTime;
 }
 
 export function getWeatherIcon(code) {

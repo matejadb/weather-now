@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import iconArrowDown from "/images/icon-dropdown.svg";
 import MenuItem from "./MenuItem";
 
-function DropdownDays({ days }) {
+function DropdownDays({ days, activeDay, onSetSelectedDay }) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
@@ -29,10 +29,10 @@ function DropdownDays({ days }) {
       <div>
         <button
           onClick={toggleDropdown}
-          className="focus:ring-neutral-0 inline-flex w-full items-center justify-center gap-2.5 rounded-lg bg-neutral-600 px-4 py-3 transition-all duration-300 hover:cursor-pointer hover:bg-neutral-700 focus:ring-3 focus:ring-offset-5 focus:ring-offset-neutral-900 focus:outline-none"
+          className="focus:ring-neutral-0 inline-flex w-[144.14px] items-center justify-center gap-2.5 rounded-lg bg-neutral-600 px-4 py-3 transition-all duration-300 hover:cursor-pointer hover:bg-neutral-700 focus:ring-3 focus:ring-offset-5 focus:ring-offset-neutral-900 focus:outline-none"
         >
           <span className="text-neutral-0 font-sans text-[16px] leading-[1.2] font-medium">
-            {days[0]}
+            {activeDay}
           </span>
           <img src={iconArrowDown} alt="Icon of an arrow pointing down." />
         </button>
@@ -44,16 +44,14 @@ function DropdownDays({ days }) {
           role="menu"
         >
           {days.map((day) => (
-            <MenuItem label={day} key={day} />
+            <MenuItem
+              label={day.dayLabel}
+              key={day.dayLabel}
+              onSetSelectedDay={onSetSelectedDay}
+              onSetIsOpen={setIsOpen}
+              activeDay={activeDay}
+            />
           ))}
-
-          {/* <MenuItem label="Monday" />
-          <MenuItem label="Tuesday" />
-          <MenuItem label="Wednseday" />
-          <MenuItem label="Thursday" />
-          <MenuItem label="Friday" />
-          <MenuItem label="Saturday" />
-          <MenuItem label="Sunday" /> */}
         </div>
       )}
     </div>
