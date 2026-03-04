@@ -12,7 +12,7 @@ function Location({ location, date }) {
   //   );
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center gap-3 md:items-start">
       <h1 className="text-neutral-0 font-sans text-[28px] leading-[1.2] font-bold">
         {location === "" ? "" : location}
       </h1>

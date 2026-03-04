@@ -1,10 +1,10 @@
 import { SyncLoader } from "react-spinners";
 import WeatherDetails from "./WeatherDetails";
 
-function Loading() {
+function LoadingCurrentWeather() {
   return (
     <div className="flex flex-col gap-5 lg:gap-8">
-      <div className="flex flex-col items-center rounded-[20px] bg-neutral-800 px-6 py-20">
+      <div className="flex h-71.5 flex-col items-center justify-center rounded-[20px] bg-neutral-800 px-6 py-20">
         <SyncLoader color="#ffffff" />
       </div>
 
@@ -18,4 +18,4 @@ function Loading() {
   );
 }
 
-export default Loading;
+export default LoadingCurrentWeather;

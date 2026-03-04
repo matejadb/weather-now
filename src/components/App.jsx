@@ -9,7 +9,8 @@ import Search from "./Search";
 import Slogan from "../ui/Slogan";
 import WeatherForecast from "../ui/WeatherForecast";
 import { useEffect, useState } from "react";
-import Loading from "./Loading";
+import LoadingCurrentWeather from "./LoadingCurrentWeather";
+import LoadingDailyWeather from "./LoadingDailyWeather";
 
 // const weatherDataCurrent = {
 //   location: "Berlin, Germany",
@@ -31,13 +32,14 @@ function App() {
   // console.log(weatherInformation);
 
   const weatherDataCurrent = weatherInformation?.current;
+  const weatherDataDaily = weatherInformation?.daily;
 
   useEffect(() => {
     async function fetchWeatherInformation() {
       try {
         if (!lat && !lng) return;
         const res = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&hourly=temperature_2m&current=temperature_2m,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,apparent_temperature`,
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m&current=temperature_2m,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,apparent_temperature`,
         );
         const data = await res.json();
         setWeatherInformation(data);
@@ -63,16 +65,21 @@ function App() {
         <Search onSetLocation={setLocation} onSetIsLoading={setIsLoading} />
         <WeatherForecast>
           <ForecastMain>
-            {isLoading || !weatherDataCurrent ? (
-              <Loading />
+            {isLoading || !weatherDataCurrent || !weatherDataDaily ? (
+              <>
+                <LoadingCurrentWeather />
+                <LoadingDailyWeather />
+              </>
             ) : (
-              <CurrentWeather
-                name={name}
-                country={country}
-                weatherData={weatherDataCurrent}
-              />
+              <>
+                <CurrentWeather
+                  name={name}
+                  country={country}
+                  weatherData={weatherDataCurrent}
+                />
+                <DailyWeather weatherData={weatherDataDaily} />
+              </>
             )}
-            <DailyWeather />
           </ForecastMain>
           <ForecastHourly />
         </WeatherForecast>

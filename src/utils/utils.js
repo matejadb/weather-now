@@ -7,6 +7,23 @@ import iconSnow from "/images/icon-snow.webp";
 import iconStorm from "/images/icon-storm.webp";
 import iconSunny from "/images/icon-sunny.webp";
 
+export function getDailyWeatherObjectArr(tempMax, tempMin, time, weatherCode) {
+  const arr = [];
+
+  for (let i = 0; i < time?.length; i++) {
+    const newObj = {
+      tempMax: tempMax[i],
+      tempMin: tempMin[i],
+      time: time[i],
+      weatherCode: weatherCode[i],
+    };
+
+    arr.push(newObj);
+  }
+
+  return arr;
+}
+
 export function formatTemperature(temp) {
   if (!temp) return;
 
