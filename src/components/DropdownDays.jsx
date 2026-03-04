@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import iconArrowDown from "/images/icon-dropdown.svg";
 import MenuItem from "./MenuItem";
 
-function DropdownDays() {
+function DropdownDays({ days }) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
@@ -32,7 +32,7 @@ function DropdownDays() {
           className="focus:ring-neutral-0 inline-flex w-full items-center justify-center gap-2.5 rounded-lg bg-neutral-600 px-4 py-3 transition-all duration-300 hover:cursor-pointer hover:bg-neutral-700 focus:ring-3 focus:ring-offset-5 focus:ring-offset-neutral-900 focus:outline-none"
         >
           <span className="text-neutral-0 font-sans text-[16px] leading-[1.2] font-medium">
-            Tuesday
+            {days[0]}
           </span>
           <img src={iconArrowDown} alt="Icon of an arrow pointing down." />
         </button>
@@ -43,13 +43,17 @@ function DropdownDays() {
           className="absolute right-0 z-100 mt-2 flex w-53.5 origin-top-right flex-col gap-1 divide-y divide-neutral-600 rounded-xl border border-neutral-600 bg-neutral-800 px-2 py-1.5"
           role="menu"
         >
-          <MenuItem label="Monday" />
+          {days.map((day) => (
+            <MenuItem label={day} key={day} />
+          ))}
+
+          {/* <MenuItem label="Monday" />
           <MenuItem label="Tuesday" />
           <MenuItem label="Wednseday" />
           <MenuItem label="Thursday" />
           <MenuItem label="Friday" />
           <MenuItem label="Saturday" />
-          <MenuItem label="Sunday" />
+          <MenuItem label="Sunday" /> */}
         </div>
       )}
     </div>

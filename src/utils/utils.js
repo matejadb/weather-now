@@ -24,6 +24,34 @@ export function getDailyWeatherObjectArr(tempMax, tempMin, time, weatherCode) {
   return arr;
 }
 
+export function getHourlyWeatherObjectArr(temp, time, weatherCode) {
+  if (!time) return {};
+
+  const grouped = {};
+
+  for (let i = 0; i < time?.length; i++) {
+    const date = time[i].split("T")[0];
+    const fullTime = time[i];
+
+    if (!grouped[date]) {
+      grouped[date] = [];
+    }
+
+    grouped[date].push({
+      time: fullTime,
+      temperature: temp[i],
+      weatherCode: weatherCode[i],
+    });
+  }
+
+  return Object.entries(grouped).map(([date, hours]) => ({
+    dayLabel: new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+    }).format(new Date(date)),
+    hours,
+  }));
+}
+
 export function formatTemperature(temp) {
   if (!temp) return;
 

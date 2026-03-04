@@ -33,13 +33,16 @@ function App() {
 
   const weatherDataCurrent = weatherInformation?.current;
   const weatherDataDaily = weatherInformation?.daily;
+  const weatherDataHourly = weatherInformation?.hourly;
+
+  // console.log(weatherDataHourly);
 
   useEffect(() => {
     async function fetchWeatherInformation() {
       try {
         if (!lat && !lng) return;
         const res = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m&current=temperature_2m,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,apparent_temperature`,
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,apparent_temperature`,
         );
         const data = await res.json();
         setWeatherInformation(data);
@@ -81,7 +84,7 @@ function App() {
               </>
             )}
           </ForecastMain>
-          <ForecastHourly />
+          <ForecastHourly weatherData={weatherDataHourly} />
         </WeatherForecast>
       </Main>
     </div>
