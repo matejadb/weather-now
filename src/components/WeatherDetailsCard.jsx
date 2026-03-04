@@ -5,7 +5,7 @@ function WeatherDetailsCard({ label, value, unit }) {
         {label}
       </span>
       <span className="text-neutral-0 font-sans text-[26px] font-light sm:text-[32px]">
-        {value} {unit}
+        {value} {value === "–" ? "" : unit}
       </span>
     </div>
   );

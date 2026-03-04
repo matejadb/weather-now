@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-function Search({ onSetLocation }) {
+function Search({ onSetLocation, onSetIsLoading }) {
   const [input, setInput] = useState("");
   const [city, setCity] = useState("Berlin");
-
-  // console.log(position);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,6 +13,7 @@ function Search({ onSetLocation }) {
 
   useEffect(() => {
     async function fetchCityPosition() {
+      onSetIsLoading(true);
       try {
         if (city.length === 0) return;
         const res = await fetch(
@@ -29,7 +28,7 @@ function Search({ onSetLocation }) {
     }
 
     fetchCityPosition();
-  }, [city, onSetLocation]);
+  }, [city, onSetIsLoading, onSetLocation]);
 
   return (
     <form

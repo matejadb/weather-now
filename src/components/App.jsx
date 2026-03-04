@@ -9,6 +9,7 @@ import Search from "./Search";
 import Slogan from "../ui/Slogan";
 import WeatherForecast from "../ui/WeatherForecast";
 import { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 // const weatherDataCurrent = {
 //   location: "Berlin, Germany",
@@ -21,14 +22,15 @@ import { useEffect, useState } from "react";
 // };
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [weatherInformation, setWeatherInformation] = useState({});
   const [location, setLocation] = useState({});
   const { name, country } = location || {};
   const { latitude: lat, longitude: lng } = location || {};
 
-  console.log(weatherInformation);
+  // console.log(weatherInformation);
 
-  const weatherDataCurrent = weatherInformation.current;
+  const weatherDataCurrent = weatherInformation?.current;
 
   useEffect(() => {
     async function fetchWeatherInformation() {
@@ -39,10 +41,10 @@ function App() {
         );
         const data = await res.json();
         setWeatherInformation(data);
-
-        // setCity(data);
       } catch (err) {
         throw new Error(err.message);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -58,14 +60,18 @@ function App() {
       <Slogan />
 
       <Main>
-        <Search onSetLocation={setLocation} />
+        <Search onSetLocation={setLocation} onSetIsLoading={setIsLoading} />
         <WeatherForecast>
           <ForecastMain>
-            <CurrentWeather
-              name={name}
-              country={country}
-              weatherData={weatherDataCurrent}
-            />
+            {isLoading || !weatherDataCurrent ? (
+              <Loading />
+            ) : (
+              <CurrentWeather
+                name={name}
+                country={country}
+                weatherData={weatherDataCurrent}
+              />
+            )}
             <DailyWeather />
           </ForecastMain>
           <ForecastHourly />
