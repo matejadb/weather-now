@@ -24,12 +24,27 @@ function DropdownDays({ days, activeDay, onSetSelectedDay }) {
     };
   }, []);
 
+  if (!days)
+    return (
+      <div>
+        <button
+          onClick={toggleDropdown}
+          className="focus:ring-neutral-0 inline-flex items-center justify-center gap-2.5 rounded-lg bg-neutral-600 px-4 py-3 transition-all duration-300 hover:cursor-pointer hover:bg-neutral-700 focus:ring-3 focus:ring-offset-5 focus:ring-offset-neutral-900 focus:outline-none"
+        >
+          <span className="text-neutral-0 font-sans text-[16px] leading-[1.2] font-medium">
+            –
+          </span>
+          <img src={iconArrowDown} alt="Icon of an arrow pointing down." />
+        </button>
+      </div>
+    );
+
   return (
     <div ref={ref} className="relative inline-block text-left">
       <div>
         <button
           onClick={toggleDropdown}
-          className="focus:ring-neutral-0 inline-flex w-[144.14px] items-center justify-center gap-2.5 rounded-lg bg-neutral-600 px-4 py-3 transition-all duration-300 hover:cursor-pointer hover:bg-neutral-700 focus:ring-3 focus:ring-offset-5 focus:ring-offset-neutral-900 focus:outline-none"
+          className="focus:ring-neutral-0 inline-flex items-center justify-center gap-2.5 rounded-lg bg-neutral-600 px-4 py-3 transition-all duration-300 hover:cursor-pointer hover:bg-neutral-700 focus:ring-3 focus:ring-offset-5 focus:ring-offset-neutral-900 focus:outline-none"
         >
           <span className="text-neutral-0 font-sans text-[16px] leading-[1.2] font-medium">
             {activeDay}

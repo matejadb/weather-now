@@ -1,6 +1,13 @@
 import { formatTemperature, formatTime, getWeatherIcon } from "../utils/utils";
 
 function HourlyWeatherCard({ data }) {
+  const isLoading = !data;
+
+  if (isLoading)
+    return (
+      <div className="flex h-14.25 items-center justify-between gap-2 rounded-lg border border-neutral-600 bg-neutral-700 py-2.5 pr-4 pl-3"></div>
+    );
+
   const { time: fullDate, temperature, weatherCode } = data;
 
   const time = formatTime(fullDate);

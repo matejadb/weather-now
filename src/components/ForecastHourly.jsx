@@ -38,14 +38,6 @@ function ForecastHourly({ weatherData }) {
           {activeDayData?.map((data) => (
             <HourlyWeatherCard data={data} key={data.time} />
           ))}
-          {/* <HourlyWeatherCard value="4 PM" temperature="20" />
-          <HourlyWeatherCard value="3 PM" temperature="20" />
-          <HourlyWeatherCard value="5 PM" temperature="20" />
-          <HourlyWeatherCard value="6 PM" temperature="19" />
-          <HourlyWeatherCard value="7 PM" temperature="18" />
-          <HourlyWeatherCard value="8 PM" temperature="18" />
-          <HourlyWeatherCard value="9 PM" temperature="17" />
-          <HourlyWeatherCard value="10 PM" temperature="17" /> */}
         </div>
       </div>
     </aside>

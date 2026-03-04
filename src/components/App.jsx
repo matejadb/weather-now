@@ -11,6 +11,7 @@ import WeatherForecast from "../ui/WeatherForecast";
 import { useEffect, useState } from "react";
 import LoadingCurrentWeather from "./LoadingCurrentWeather";
 import LoadingDailyWeather from "./LoadingDailyWeather";
+import LoadingHourlyForecast from "./LoadingHourlyForecast";
 
 // const weatherDataCurrent = {
 //   location: "Berlin, Germany",
@@ -84,7 +85,11 @@ function App() {
               </>
             )}
           </ForecastMain>
-          <ForecastHourly weatherData={weatherDataHourly} />
+          {isLoading || !weatherDataHourly ? (
+            <LoadingHourlyForecast />
+          ) : (
+            <ForecastHourly weatherData={weatherDataHourly} />
+          )}
         </WeatherForecast>
       </Main>
     </div>
