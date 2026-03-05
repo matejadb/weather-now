@@ -8,15 +8,7 @@ function DailyForecastCard({ dailyInformation, temperatureUnit }) {
 
   if (isLoading)
     return (
-      <div className="text-neutral-0 flex h-41.25 flex-col items-center gap-4 rounded-xl border border-neutral-600 bg-neutral-800 px-2.5 py-4">
-        {/* <span className="font-sans text-[18px] leading-[1.2] font-medium"></span>
-        <img className="size-15" src={getWeatherIcon(weatherCode)} alt="icon" />
-
-        <div className="flex w-full items-center justify-between">
-          <span className="font-sans text-[16px] leading-[1.2] font-medium"></span>
-          <span className="font-sans text-[16px] leading-[1.2] text-neutral-200"></span>
-        </div> */}
-      </div>
+      <div className="text-neutral-0 flex h-41.25 flex-col items-center gap-4 rounded-xl border border-neutral-600 bg-neutral-800 px-2.5 py-4"></div>
     );
 
   return (

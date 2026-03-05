@@ -4,7 +4,7 @@ function MenuGroup({ children, groupLabel }) {
       <span className="px-2 font-sans text-sm leading-[1.2] font-medium text-neutral-300">
         {groupLabel}
       </span>
-      <div>{children}</div>
+      <div className="mb-1 flex flex-col gap-1">{children}</div>
     </div>
   );
 }

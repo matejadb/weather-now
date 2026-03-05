@@ -5,6 +5,8 @@ import MenuItem from "./MenuItem";
 import MenuGroup from "./MenuGroup";
 
 function DropdownUnits({
+  switchTo,
+  onSetSwitchTo,
   onSetTemperatureUnit,
   onSetWindSpeedUnit,
   onSetPrecipitationUnit,
@@ -14,6 +16,18 @@ function DropdownUnits({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
+
+  function handleSwitchAll(nextSystem) {
+    if (nextSystem === "Imperial") {
+      onSetTemperatureUnit("Celsius (°C)");
+      onSetWindSpeedUnit("km/h");
+      onSetPrecipitationUnit("Millimeters (mm)");
+    } else {
+      onSetTemperatureUnit("Fahrenheit (°F)");
+      onSetWindSpeedUnit("mph");
+      onSetPrecipitationUnit("Inches (in)");
+    }
+  }
 
   const toggleDropdown = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -29,7 +43,7 @@ function DropdownUnits({
     document.addEventListener("click", callback);
 
     return () => document.removeEventListener("click", callback);
-  });
+  }, []);
 
   const temperatureUnits = ["Celsius (°C)", "Fahrenheit (°F)"];
   const windSpeedUnits = ["km/h", "mph"];
@@ -55,7 +69,11 @@ function DropdownUnits({
           className="absolute right-0 z-100 mt-2 flex w-53.5 origin-top-right flex-col gap-1 divide-y divide-neutral-600 rounded-xl border border-neutral-600 bg-neutral-800 px-2 py-1.5"
           role="menu"
         >
-          <MenuItem label="Switch to Imperial" />
+          <MenuItem
+            label={`Switch to ${switchTo}`}
+            onSetSwitchTo={onSetSwitchTo}
+            onSwitchAll={handleSwitchAll}
+          />
 
           <MenuGroup groupLabel="Temperature">
             {temperatureUnits.map((unit) => (

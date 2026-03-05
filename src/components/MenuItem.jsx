@@ -1,11 +1,22 @@
 function MenuItem({
   label,
-  onSetSelectedDay = null,
+  onSetSelectedDay,
   onSetIsOpen,
-  activeDay = null,
-  unit = null,
-  onSetUnit = null,
+  activeDay,
+  unit,
+  onSetUnit,
+  onSwitchAll,
+  onSetSwitchTo,
 }) {
+  function handleSwitchTo(e) {
+    e.preventDefault();
+    onSetSwitchTo((prev) => {
+      const next = prev === "Imperial" ? "Metric" : "Imperial";
+      onSwitchAll(next);
+      return next;
+    });
+  }
+
   function handleSelectDay(e) {
     e.preventDefault();
     onSetSelectedDay(label);
@@ -15,10 +26,22 @@ function MenuItem({
   function handleSelectUnit(e) {
     e.preventDefault();
     onSetUnit(label);
-    // console.log(unit);
   }
 
-  if (!onSetSelectedDay)
+  if (onSetSelectedDay)
+    return (
+      <a
+        onClick={handleSelectDay}
+        href="#"
+        className={`text-neutral-0 block ${
+          activeDay === label ? "bg-neutral-700" : ""
+        } rounded-lg border-none px-2 py-2.5 font-sans text-[16px] leading-[1.2] font-medium transition-all duration-300 hover:bg-neutral-700`}
+      >
+        {label}
+      </a>
+    );
+
+  if (onSetUnit)
     return (
       <a
         onClick={handleSelectUnit}
@@ -31,11 +54,9 @@ function MenuItem({
 
   return (
     <a
-      onClick={handleSelectDay}
+      onClick={handleSwitchTo}
       href="#"
-      className={`text-neutral-0 block ${
-        activeDay === label ? "bg-neutral-700" : ""
-      } rounded-lg border-none px-2 py-2.5 font-sans text-[16px] leading-[1.2] font-medium transition-all duration-300 hover:bg-neutral-700`}
+      className={`text-neutral-0 block rounded-lg border-none px-2 py-2.5 font-sans text-[16px] leading-[1.2] font-medium transition-all duration-300 hover:bg-neutral-700`}
     >
       {label}
     </a>

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import CurrentWeather from "./CurrentWeather";
 import DailyWeather from "./DailyWeather";
 import DropdownUnits from "./DropdownUnits";
@@ -8,25 +10,15 @@ import Main from "../ui/Main";
 import Search from "./Search";
 import Slogan from "../ui/Slogan";
 import WeatherForecast from "../ui/WeatherForecast";
-import { useEffect, useState } from "react";
 import LoadingCurrentWeather from "./LoadingCurrentWeather";
 import LoadingDailyWeather from "./LoadingDailyWeather";
 import LoadingHourlyForecast from "./LoadingHourlyForecast";
-
-// const weatherDataCurrent = {
-//   location: "Berlin, Germany",
-//   date: "Tuesday, Aug 5, 2025",
-//   temperature: 20,
-//   feelsLike: 18,
-//   humidity: 46,
-//   wind: 14,
-//   precipitation: 0,
-// };
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [weatherInformation, setWeatherInformation] = useState({});
   const [location, setLocation] = useState({});
+  const [switchTo, setSwitchTo] = useState("Imperial");
 
   const [temperatureUnit, setTemperatureUnit] = useState("Celsius (°C)");
   const [windSpeedUnit, setWindSpeedUnit] = useState("km/h");
@@ -36,13 +28,9 @@ function App() {
   const { name, country } = location || {};
   const { latitude: lat, longitude: lng } = location || {};
 
-  // console.log(weatherInformation);
-
   const weatherDataCurrent = weatherInformation?.current;
   const weatherDataDaily = weatherInformation?.daily;
   const weatherDataHourly = weatherInformation?.hourly;
-
-  // console.log(weatherDataHourly);
 
   useEffect(() => {
     async function fetchWeatherInformation() {
@@ -67,6 +55,8 @@ function App() {
     <div className="flex flex-col gap-12 bg-neutral-900 px-4 pt-4 pb-12 md:px-6 md:pt-6 md:pb-20 lg:gap-16 lg:px-28 lg:pt-12">
       <Header>
         <DropdownUnits
+          switchTo={switchTo}
+          onSetSwitchTo={setSwitchTo}
           onSetTemperatureUnit={setTemperatureUnit}
           onSetWindSpeedUnit={setWindSpeedUnit}
           onSetPrecipitationUnit={setPrecipitationUnit}
