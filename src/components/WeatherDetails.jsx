@@ -5,11 +5,11 @@ function WeatherDetails({ feelsLike, humidity, wind, precipitation }) {
     <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
       <WeatherDetailsCard label="Feels Like" value={feelsLike} unit="°" />
       <WeatherDetailsCard label="Humidity" value={humidity} unit="%" />
-      <WeatherDetailsCard label="Wind" value={wind} unit="km/h" />
+      <WeatherDetailsCard label="Wind" value={wind.value} unit={wind.unit} />
       <WeatherDetailsCard
         label="Precipitation"
-        value={precipitation}
-        unit="mm"
+        value={precipitation.value}
+        unit={precipitation.unit}
       />
     </div>
   );

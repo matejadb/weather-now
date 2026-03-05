@@ -52,16 +52,29 @@ export function getHourlyWeatherObjectArr(temp, time, weatherCode) {
   }));
 }
 
-export function formatTemperature(temp) {
+export function formatTemperature(temp, unit) {
   if (temp === null) return "";
+  const selected = unit?.split(" ")[0].toLowerCase();
+
+  if (selected === "fahrenheit") return Math.floor(temp * (9 / 5) + 32);
 
   return Math.floor(temp);
 }
 
-export function formatWindSpeed(speed) {
+export function formatWindSpeed(speed, unit) {
   if (!speed) return;
 
-  return Math.floor(speed);
+  if (unit === "mph") return { value: Math.floor(speed / 1.6), unit: "mph" };
+
+  return { value: Math.floor(speed), unit: "km/h" };
+}
+
+export function formatPrecipitation(precipitation, unit) {
+  const selected = unit.split(" ")[1].split("(")[1].split(")")[0];
+  if (selected === "in")
+    return { value: Math.floor(precipitation / 25.4), unit: "in" };
+
+  return { value: Math.floor(precipitation), unit: "mm" };
 }
 
 export function formatDate(date) {

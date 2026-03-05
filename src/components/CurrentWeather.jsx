@@ -3,13 +3,31 @@ import Temperature from "./Temperature";
 import WeatherDetails from "./WeatherDetails";
 import {
   formatDate,
+  formatPrecipitation,
   formatTemperature,
   formatWindSpeed,
   getWeatherIcon,
 } from "../utils/utils";
 
-function CurrentWeather({ weatherData, name, country }) {
+function CurrentWeather({
+  weatherData,
+  name,
+  country,
+  temperatureUnit,
+  windSpeedUnit,
+  precipitationUnit,
+}) {
   const location = `${name}, ${country}`;
+
+  const temperature = formatTemperature(
+    weatherData?.temperature_2m,
+    temperatureUnit,
+  );
+  const windSpeed = formatWindSpeed(weatherData?.wind_speed_10m, windSpeedUnit);
+  const precipitation = formatPrecipitation(
+    weatherData?.precipitation,
+    precipitationUnit,
+  );
 
   return (
     <div className="flex flex-col gap-5">
@@ -18,15 +36,18 @@ function CurrentWeather({ weatherData, name, country }) {
 
         <Temperature
           icon={getWeatherIcon(weatherData?.weather_code)}
-          temperature={formatTemperature(weatherData?.temperature_2m)}
+          temperature={temperature}
         />
       </div>
 
       <WeatherDetails
-        feelsLike={formatTemperature(weatherData?.apparent_temperature)}
+        feelsLike={formatTemperature(
+          weatherData?.apparent_temperature,
+          temperatureUnit,
+        )}
         humidity={weatherData?.relative_humidity_2m}
-        wind={formatWindSpeed(weatherData?.wind_speed_10m)}
-        precipitation={weatherData?.precipitation}
+        wind={windSpeed}
+        precipitation={precipitation}
       />
     </div>
   );

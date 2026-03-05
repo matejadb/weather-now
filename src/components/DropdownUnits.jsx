@@ -4,7 +4,14 @@ import iconArrowDown from "/images/icon-dropdown.svg";
 import MenuItem from "./MenuItem";
 import MenuGroup from "./MenuGroup";
 
-function DropdownUnits() {
+function DropdownUnits({
+  onSetTemperatureUnit,
+  onSetWindSpeedUnit,
+  onSetPrecipitationUnit,
+  temperatureUnit,
+  windSpeedUnit,
+  precipitationUnit,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
@@ -23,6 +30,10 @@ function DropdownUnits() {
 
     return () => document.removeEventListener("click", callback);
   });
+
+  const temperatureUnits = ["Celsius (°C)", "Fahrenheit (°F)"];
+  const windSpeedUnits = ["km/h", "mph"];
+  const precipitationUnits = ["Millimeters (mm)", "Inches (in)"];
 
   return (
     <div ref={ref} className="relative inline-block text-left">
@@ -47,18 +58,36 @@ function DropdownUnits() {
           <MenuItem label="Switch to Imperial" />
 
           <MenuGroup groupLabel="Temperature">
-            <MenuItem label="Celsius (°C)" />
-            <MenuItem label="Fahrenheit (°F)" />
+            {temperatureUnits.map((unit) => (
+              <MenuItem
+                key={unit}
+                label={unit}
+                unit={temperatureUnit}
+                onSetUnit={onSetTemperatureUnit}
+              />
+            ))}
           </MenuGroup>
 
           <MenuGroup groupLabel="Wind Speed">
-            <MenuItem label="km/h" />
-            <MenuItem label="mph" />
+            {windSpeedUnits.map((unit) => (
+              <MenuItem
+                key={unit}
+                label={unit}
+                unit={windSpeedUnit}
+                onSetUnit={onSetWindSpeedUnit}
+              />
+            ))}
           </MenuGroup>
 
           <MenuGroup groupLabel="Precipitation">
-            <MenuItem label="Millimeters (mm)" />
-            <MenuItem label="Inches (in)" />
+            {precipitationUnits.map((unit) => (
+              <MenuItem
+                key={unit}
+                label={unit}
+                unit={precipitationUnit}
+                onSetUnit={onSetPrecipitationUnit}
+              />
+            ))}
           </MenuGroup>
         </div>
       )}

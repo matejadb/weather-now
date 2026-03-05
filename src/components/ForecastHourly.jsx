@@ -3,7 +3,7 @@ import { getHourlyWeatherObjectArr } from "../utils/utils";
 import DropdownDays from "./DropdownDays";
 import HourlyWeatherCard from "./HourlyWeatherCard";
 
-function ForecastHourly({ weatherData }) {
+function ForecastHourly({ weatherData, temperatureUnit }) {
   const {
     temperature_2m: temperature,
     time,
@@ -36,7 +36,11 @@ function ForecastHourly({ weatherData }) {
       <div className="mt-4 flex-1 overflow-y-auto">
         <div className="flex flex-col gap-4">
           {activeDayData?.map((data) => (
-            <HourlyWeatherCard data={data} key={data.time} />
+            <HourlyWeatherCard
+              data={data}
+              key={data.time}
+              temperatureUnit={temperatureUnit}
+            />
           ))}
         </div>
       </div>

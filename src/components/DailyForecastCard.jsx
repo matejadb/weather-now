@@ -1,6 +1,6 @@
 import { formatTemperature, getWeatherIcon } from "../utils/utils";
 
-function DailyForecastCard({ dailyInformation }) {
+function DailyForecastCard({ dailyInformation, temperatureUnit }) {
   const isLoading = !dailyInformation;
 
   const { tempMax, tempMin, time, weatherCode } = dailyInformation || {};
@@ -28,10 +28,10 @@ function DailyForecastCard({ dailyInformation }) {
 
       <div className="flex w-full items-center justify-between">
         <span className="font-sans text-[16px] leading-[1.2] font-medium">
-          {formatTemperature(tempMax)}°
+          {formatTemperature(tempMax, temperatureUnit)}°
         </span>
         <span className="font-sans text-[16px] leading-[1.2] text-neutral-200">
-          {formatTemperature(tempMin)}°
+          {formatTemperature(tempMin, temperatureUnit)}°
         </span>
       </div>
     </div>

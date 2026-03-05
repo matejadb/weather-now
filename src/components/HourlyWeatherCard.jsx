@@ -1,6 +1,6 @@
 import { formatTemperature, formatTime, getWeatherIcon } from "../utils/utils";
 
-function HourlyWeatherCard({ data }) {
+function HourlyWeatherCard({ data, temperatureUnit }) {
   const isLoading = !data;
 
   if (isLoading)
@@ -22,7 +22,7 @@ function HourlyWeatherCard({ data }) {
       </div>
 
       <span className="text-neutral-0 font-sans text-[16px] leading-[1.2] font-medium">
-        {formatTemperature(temperature)}°
+        {formatTemperature(temperature, temperatureUnit)}°
       </span>
     </div>
   );
