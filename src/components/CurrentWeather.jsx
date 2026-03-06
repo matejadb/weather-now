@@ -7,17 +7,23 @@ import {
   formatTemperature,
   formatWindSpeed,
   getWeatherIcon,
-} from "../utils/utils";
+} from "../utils/helpers";
+import { useSelector } from "react-redux";
 
 function CurrentWeather({
   weatherData,
   name,
   country,
-  temperatureUnit,
-  windSpeedUnit,
-  precipitationUnit,
+  // temperatureUnit,
+  // windSpeedUnit,
+  // precipitationUnit,
 }) {
   const location = `${name}, ${country}`;
+  const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
+  const windSpeedUnit = useSelector((state) => state.weather.windSpeedUnit);
+  const precipitationUnit = useSelector(
+    (state) => state.weather.precipitationUnit,
+  );
 
   const temperature = formatTemperature(
     weatherData?.temperature_2m,

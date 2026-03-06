@@ -1,7 +1,7 @@
-import { getDailyWeatherObjectArr } from "../utils/utils";
+import { getDailyWeatherObjectArr } from "../utils/helpers";
 import DailyForecastCard from "./DailyForecastCard";
 
-function DailyWeather({ weatherData, temperatureUnit }) {
+function DailyWeather({ weatherData }) {
   const {
     temperature_2m_max: tempMax,
     temperature_2m_min: tempMin,
@@ -25,11 +25,7 @@ function DailyWeather({ weatherData, temperatureUnit }) {
       {/* FORECASTS */}
       <div className="grid grid-cols-3 items-center gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7">
         {dailyWeather?.map((daily) => (
-          <DailyForecastCard
-            dailyInformation={daily}
-            key={daily.time}
-            temperatureUnit={temperatureUnit}
-          />
+          <DailyForecastCard dailyInformation={daily} key={daily.time} />
         ))}
       </div>
     </div>

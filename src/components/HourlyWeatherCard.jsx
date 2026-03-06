@@ -1,7 +1,13 @@
-import { formatTemperature, formatTime, getWeatherIcon } from "../utils/utils";
+import { useSelector } from "react-redux";
+import {
+  formatTemperature,
+  formatTime,
+  getWeatherIcon,
+} from "../utils/helpers";
 
-function HourlyWeatherCard({ data, temperatureUnit }) {
+function HourlyWeatherCard({ data }) {
   const isLoading = !data;
+  const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
 
   if (isLoading)
     return (

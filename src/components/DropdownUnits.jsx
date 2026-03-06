@@ -3,31 +3,21 @@ import iconCog from "/images/icon-units.svg";
 import iconArrowDown from "/images/icon-dropdown.svg";
 import MenuItem from "./MenuItem";
 import MenuGroup from "./MenuGroup";
+import { useSelector } from "react-redux";
 
-function DropdownUnits({
-  switchTo,
-  onSetSwitchTo,
-  onSetTemperatureUnit,
-  onSetWindSpeedUnit,
-  onSetPrecipitationUnit,
-  temperatureUnit,
-  windSpeedUnit,
-  precipitationUnit,
-}) {
+function DropdownUnits() {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
-  function handleSwitchAll(nextSystem) {
-    if (nextSystem === "Imperial") {
-      onSetTemperatureUnit("Celsius (°C)");
-      onSetWindSpeedUnit("km/h");
-      onSetPrecipitationUnit("Millimeters (mm)");
-    } else {
-      onSetTemperatureUnit("Fahrenheit (°F)");
-      onSetWindSpeedUnit("mph");
-      onSetPrecipitationUnit("Inches (in)");
-    }
-  }
+  const nextMetricSystem = useSelector(
+    (state) => state.weather.nextMetricSystem,
+  );
+
+  const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
+  const windSpeedUnit = useSelector((state) => state.weather.windSpeedUnit);
+  const precipitationUnit = useSelector(
+    (state) => state.weather.precipitationUnit,
+  );
 
   const toggleDropdown = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -69,11 +59,7 @@ function DropdownUnits({
           className="absolute right-0 z-100 mt-2 flex w-53.5 origin-top-right flex-col gap-1 divide-y divide-neutral-600 rounded-xl border border-neutral-600 bg-neutral-800 px-2 py-1.5"
           role="menu"
         >
-          <MenuItem
-            label={`Switch to ${switchTo}`}
-            onSetSwitchTo={onSetSwitchTo}
-            onSwitchAll={handleSwitchAll}
-          />
+          <MenuItem label={`Switch to ${nextMetricSystem}`} />
 
           <MenuGroup groupLabel="Temperature">
             {temperatureUnits.map((unit) => (
@@ -81,7 +67,8 @@ function DropdownUnits({
                 key={unit}
                 label={unit}
                 unit={temperatureUnit}
-                onSetUnit={onSetTemperatureUnit}
+                // onSetUnit={dispatch(updateTemperatureUnit)}
+                type={"temperature"}
               />
             ))}
           </MenuGroup>
@@ -92,7 +79,8 @@ function DropdownUnits({
                 key={unit}
                 label={unit}
                 unit={windSpeedUnit}
-                onSetUnit={onSetWindSpeedUnit}
+                // onSetUnit={dispatch(updateWindSpeedUnit)}
+                type={"windSpeed"}
               />
             ))}
           </MenuGroup>
@@ -103,7 +91,8 @@ function DropdownUnits({
                 key={unit}
                 label={unit}
                 unit={precipitationUnit}
-                onSetUnit={onSetPrecipitationUnit}
+                // onSetUnit={dispatch(updatePrecipitationUnit)}
+                type={"precipitation"}
               />
             ))}
           </MenuGroup>

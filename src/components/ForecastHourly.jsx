@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getHourlyWeatherObjectArr } from "../utils/utils";
+import { getHourlyWeatherObjectArr } from "../utils/helpers";
 import DropdownDays from "./DropdownDays";
 import HourlyWeatherCard from "./HourlyWeatherCard";
 

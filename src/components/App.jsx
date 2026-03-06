@@ -18,12 +18,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [weatherInformation, setWeatherInformation] = useState({});
   const [location, setLocation] = useState({});
-  const [switchTo, setSwitchTo] = useState("Imperial");
-
-  const [temperatureUnit, setTemperatureUnit] = useState("Celsius (°C)");
-  const [windSpeedUnit, setWindSpeedUnit] = useState("km/h");
-  const [precipitationUnit, setPrecipitationUnit] =
-    useState("Millimeters (mm)");
 
   const { name, country } = location || {};
   const { latitude: lat, longitude: lng } = location || {};
@@ -54,16 +48,7 @@ function App() {
   return (
     <div className="flex flex-col gap-12 bg-neutral-900 px-4 pt-4 pb-12 md:px-6 md:pt-6 md:pb-20 lg:gap-16 lg:px-28 lg:pt-12">
       <Header>
-        <DropdownUnits
-          switchTo={switchTo}
-          onSetSwitchTo={setSwitchTo}
-          onSetTemperatureUnit={setTemperatureUnit}
-          onSetWindSpeedUnit={setWindSpeedUnit}
-          onSetPrecipitationUnit={setPrecipitationUnit}
-          temperatureUnit={temperatureUnit}
-          windSpeedUnit={windSpeedUnit}
-          precipitationUnit={precipitationUnit}
-        />
+        <DropdownUnits />
       </Header>
 
       <Slogan />
@@ -83,24 +68,15 @@ function App() {
                   name={name}
                   country={country}
                   weatherData={weatherDataCurrent}
-                  temperatureUnit={temperatureUnit}
-                  windSpeedUnit={windSpeedUnit}
-                  precipitationUnit={precipitationUnit}
                 />
-                <DailyWeather
-                  weatherData={weatherDataDaily}
-                  temperatureUnit={temperatureUnit}
-                />
+                <DailyWeather weatherData={weatherDataDaily} />
               </>
             )}
           </ForecastMain>
           {isLoading || !weatherDataHourly ? (
             <LoadingHourlyForecast />
           ) : (
-            <ForecastHourly
-              weatherData={weatherDataHourly}
-              temperatureUnit={temperatureUnit}
-            />
+            <ForecastHourly weatherData={weatherDataHourly} />
           )}
         </WeatherForecast>
       </Main>

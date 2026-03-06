@@ -1,20 +1,37 @@
+import { useDispatch } from "react-redux";
+import {
+  updateNextMetricSystem,
+  updatePrecipitationUnit,
+  updateTemperatureUnit,
+  updateUnitsToImperial,
+  updateUnitsToMetric,
+  updateWindSpeedUnit,
+} from "../weatherSlice";
+import { useSelector } from "react-redux";
+
 function MenuItem({
   label,
   onSetSelectedDay,
   onSetIsOpen,
   activeDay,
   unit,
-  onSetUnit,
-  onSwitchAll,
-  onSetSwitchTo,
+  type,
 }) {
+  const previousMetricSystem = useSelector(
+    (state) => state.weather.nextMetricSystem,
+  );
+  const dispatch = useDispatch();
+
   function handleSwitchTo(e) {
     e.preventDefault();
-    onSetSwitchTo((prev) => {
-      const next = prev === "Imperial" ? "Metric" : "Imperial";
-      onSwitchAll(next);
-      return next;
-    });
+
+    const nextMetric =
+      previousMetricSystem === "Imperial" ? "Metric" : "Imperial";
+    dispatch(updateNextMetricSystem(nextMetric));
+
+    if (previousMetricSystem === "Imperial") {
+      dispatch(updateUnitsToImperial());
+    } else dispatch(updateUnitsToMetric());
   }
 
   function handleSelectDay(e) {
@@ -25,7 +42,19 @@ function MenuItem({
 
   function handleSelectUnit(e) {
     e.preventDefault();
-    onSetUnit(label);
+    switch (type) {
+      case "temperature":
+        dispatch(updateTemperatureUnit(label));
+        break;
+      case "windSpeed":
+        dispatch(updateWindSpeedUnit(label));
+        break;
+      case "precipitation":
+        dispatch(updatePrecipitationUnit(label));
+        break;
+      default:
+        throw new Error("There has been an error.");
+    }
   }
 
   if (onSetSelectedDay)
@@ -41,7 +70,7 @@ function MenuItem({
       </a>
     );
 
-  if (onSetUnit)
+  if (type)
     return (
       <a
         onClick={handleSelectUnit}

@@ -1,7 +1,10 @@
-import { formatTemperature, getWeatherIcon } from "../utils/utils";
+import { useSelector } from "react-redux";
+import { formatTemperature, getWeatherIcon } from "../utils/helpers";
 
-function DailyForecastCard({ dailyInformation, temperatureUnit }) {
+function DailyForecastCard({ dailyInformation }) {
   const isLoading = !dailyInformation;
+
+  const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
 
   const { tempMax, tempMin, time, weatherCode } = dailyInformation || {};
   const label = new Date(time).toDateString().split(" ")[0];
