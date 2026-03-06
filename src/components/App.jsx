@@ -49,7 +49,7 @@ function App() {
   }, [lat, lng]);
 
   return (
-    <div className="flex flex-col gap-12 bg-neutral-900 px-4 pt-4 pb-12 md:px-6 md:pt-6 md:pb-20 lg:gap-16 lg:px-28 lg:pt-12">
+    <div className="flex min-h-screen flex-col gap-12 bg-neutral-900 px-4 pt-4 pb-12 md:px-6 md:pt-6 md:pb-20 lg:gap-16 lg:px-28 lg:pt-12">
       <Header>
         <DropdownUnits />
       </Header>
