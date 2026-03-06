@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-function Search({ onSetLocation, onSetIsLoading }) {
+function Search({ onSetLocation, onSetIsLoading, onSetErrorCity }) {
   const [input, setInput] = useState("");
   const [city, setCity] = useState("Berlin");
 
@@ -14,6 +14,7 @@ function Search({ onSetLocation, onSetIsLoading }) {
   useEffect(() => {
     async function fetchCityPosition() {
       onSetIsLoading(true);
+      onSetErrorCity(false);
       try {
         if (city.length === 0) return;
         const res = await fetch(
@@ -21,6 +22,12 @@ function Search({ onSetLocation, onSetIsLoading }) {
         );
 
         const data = await res.json();
+
+        if (!data.results) {
+          onSetErrorCity(true);
+          return;
+        }
+
         onSetLocation(data.results[0]);
       } catch (err) {
         throw new Error(err.message);

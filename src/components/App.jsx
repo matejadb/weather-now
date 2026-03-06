@@ -13,19 +13,22 @@ import WeatherForecast from "../ui/WeatherForecast";
 import LoadingCurrentWeather from "./LoadingCurrentWeather";
 import LoadingDailyWeather from "./LoadingDailyWeather";
 import LoadingHourlyForecast from "./LoadingHourlyForecast";
+import NoSearchResults from "../ui/NoSearchResults";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
   const [weatherInformation, setWeatherInformation] = useState({});
   const [location, setLocation] = useState({});
+  const [errorCity, setErrorCity] = useState(false);
 
   const { name, country } = location || {};
   const { latitude: lat, longitude: lng } = location || {};
 
+  const [isLoading, setIsLoading] = useState(false);
   const weatherDataCurrent = weatherInformation?.current;
   const weatherDataDaily = weatherInformation?.daily;
   const weatherDataHourly = weatherInformation?.hourly;
 
+  // console.log(weatherInformation);
   useEffect(() => {
     async function fetchWeatherInformation() {
       try {
@@ -54,31 +57,38 @@ function App() {
       <Slogan />
 
       <Main>
-        <Search onSetLocation={setLocation} onSetIsLoading={setIsLoading} />
-        <WeatherForecast>
-          <ForecastMain>
-            {isLoading || !weatherDataCurrent || !weatherDataDaily ? (
-              <>
-                <LoadingCurrentWeather />
-                <LoadingDailyWeather />
-              </>
+        <Search
+          onSetLocation={setLocation}
+          onSetIsLoading={setIsLoading}
+          onSetErrorCity={setErrorCity}
+        />
+        {errorCity && <NoSearchResults />}
+        {!errorCity && (
+          <WeatherForecast>
+            <ForecastMain>
+              {isLoading || !weatherDataCurrent || !weatherDataDaily ? (
+                <>
+                  <LoadingCurrentWeather />
+                  <LoadingDailyWeather />
+                </>
+              ) : (
+                <>
+                  <CurrentWeather
+                    name={name}
+                    country={country}
+                    weatherData={weatherDataCurrent}
+                  />
+                  <DailyWeather weatherData={weatherDataDaily} />
+                </>
+              )}
+            </ForecastMain>
+            {isLoading || !weatherDataHourly ? (
+              <LoadingHourlyForecast />
             ) : (
-              <>
-                <CurrentWeather
-                  name={name}
-                  country={country}
-                  weatherData={weatherDataCurrent}
-                />
-                <DailyWeather weatherData={weatherDataDaily} />
-              </>
+              <ForecastHourly weatherData={weatherDataHourly} />
             )}
-          </ForecastMain>
-          {isLoading || !weatherDataHourly ? (
-            <LoadingHourlyForecast />
-          ) : (
-            <ForecastHourly weatherData={weatherDataHourly} />
-          )}
-        </WeatherForecast>
+          </WeatherForecast>
+        )}
       </Main>
     </div>
   );
