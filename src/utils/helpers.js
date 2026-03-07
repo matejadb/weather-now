@@ -106,47 +106,33 @@ export function formatTime(time) {
 }
 
 export function getWeatherIcon(code) {
-  switch (code) {
-    case 0:
-      return iconSunny;
-    case 1:
-    case 2:
-      return iconPartlyCloudy;
-    case 3:
-      return iconOvercast;
-    case 45:
-    case 48:
-      return iconFog;
-    case 51:
-    case 53:
-    case 55:
-    case 56:
-    case 57:
-      return iconDrizzle;
-    case 61:
-    case 63:
-    case 65:
-    case 66:
-    case 67:
-      return iconRain;
-    case 71:
-    case 73:
-    case 75:
-    case 77:
-      return iconSnow;
+  const iconMap = {
+    iconSunny: [0, 1],
+    iconPartlyCloudy: [2],
+    iconOvercast: [3],
+    iconFog: [45, 48],
+    iconDrizzle: [51, 53, 55, 56, 57],
+    iconRain: [61, 63, 65, 67, 80, 81, 82],
+    iconSnow: [71, 73, 75, 77, 85, 86],
+    iconStorm: [95, 96, 99],
+  };
 
-    case 80:
-    case 81:
-    case 82:
-      return iconRain;
+  const icons = {
+    iconSunny,
+    iconPartlyCloudy,
+    iconOvercast,
+    iconFog,
+    iconDrizzle,
+    iconRain,
+    iconSnow,
+    iconStorm,
+  };
 
-    case 85:
-    case 86:
-      return iconSnow;
-
-    case 95:
-    case 96:
-    case 99:
-      return iconStorm;
+  for (const [key, codes] of Object.entries(iconMap)) {
+    if (codes.includes(code)) {
+      return icons[key];
+    }
   }
+
+  return icons.iconSunny;
 }

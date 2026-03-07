@@ -80,9 +80,8 @@ const weatherDataSlice = createSlice({
         state.position = action.payload.position;
         state.status = "loading";
       })
-      .addCase(fetchLocation.rejected, (state, action) => {
-        state.error = action.error.message;
-        state.status = "error";
+      .addCase(fetchLocation.rejected, (state) => {
+        state.searchQuery = "Berlin";
       })
 
       .addCase(fetchWeather.pending, (state) => {
