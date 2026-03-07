@@ -13,13 +13,17 @@ function DropdownUnits() {
   const ref = useRef(null);
 
   const nextMetricSystem = useSelector(
-    (state) => state.weather.nextMetricSystem,
+    (state) => state.weatherUnits.nextMetricSystem,
   );
 
-  const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
-  const windSpeedUnit = useSelector((state) => state.weather.windSpeedUnit);
+  const temperatureUnit = useSelector(
+    (state) => state.weatherUnits.temperatureUnit,
+  );
+  const windSpeedUnit = useSelector(
+    (state) => state.weatherUnits.windSpeedUnit,
+  );
   const precipitationUnit = useSelector(
-    (state) => state.weather.precipitationUnit,
+    (state) => state.weatherUnits.precipitationUnit,
   );
 
   const toggleDropdown = () => {

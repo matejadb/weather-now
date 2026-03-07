@@ -1,4 +1,11 @@
-function Temperature({ icon, temperature }) {
+import { useSelector } from "react-redux";
+import { formatTemperature } from "../utils/helpers";
+
+function Temperature({ icon }) {
+  const { current } = useSelector((state) => state.weatherData);
+
+  const temperature = formatTemperature(current.temperature_2m);
+
   return (
     <div className="flex items-center justify-center gap-5">
       <img className="size-30" src={icon} alt="icon" />

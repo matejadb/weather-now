@@ -62,7 +62,7 @@ export function formatTemperature(temp, unit) {
 }
 
 export function formatWindSpeed(speed, unit) {
-  if (!speed) return;
+  if (speed === null) return { value: "–", unit: "" };
 
   if (unit === "mph") return { value: Math.floor(speed / 1.6), unit: "mph" };
 
@@ -70,6 +70,8 @@ export function formatWindSpeed(speed, unit) {
 }
 
 export function formatPrecipitation(precipitation, unit) {
+  if (precipitation === null) return { value: "–", unit: "" };
+
   const selected = unit.split(" ")[1].split("(")[1].split(")")[0];
   if (selected === "in")
     return { value: Math.floor(precipitation / 25.4), unit: "in" };

@@ -4,7 +4,9 @@ import { formatTemperature, getWeatherIcon } from "../utils/helpers";
 function DailyForecastCard({ dailyInformation }) {
   const isLoading = !dailyInformation;
 
-  const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
+  const temperatureUnit = useSelector(
+    (state) => state.weatherUnits.temperatureUnit,
+  );
 
   const { tempMax, tempMin, time, weatherCode } = dailyInformation || {};
   const label = new Date(time).toDateString().split(" ")[0];

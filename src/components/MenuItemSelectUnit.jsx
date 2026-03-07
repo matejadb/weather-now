@@ -4,7 +4,7 @@ import {
   updatePrecipitationUnit,
   updateTemperatureUnit,
   updateWindSpeedUnit,
-} from "../slices/weatherSlice";
+} from "../slices/weatherUnitsSlice";
 
 function MenuItemSelectUnit({ label, unit, type }) {
   const dispatch = useDispatch();

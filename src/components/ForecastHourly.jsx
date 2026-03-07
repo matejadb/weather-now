@@ -1,15 +1,19 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import { getHourlyWeatherObjectArr } from "../utils/helpers";
 
 import DropdownDays from "./DropdownDays";
 import HourlyWeatherCard from "./HourlyWeatherCard";
 
-function ForecastHourly({ weatherData, temperatureUnit }) {
+function ForecastHourly() {
+  const { hourly } = useSelector((state) => state.weatherData);
+
   const {
     temperature_2m: temperature,
     time,
     weather_code: weatherCode,
-  } = weatherData || {};
+  } = hourly;
 
   const groupedDays = getHourlyWeatherObjectArr(temperature, time, weatherCode);
 
@@ -37,11 +41,7 @@ function ForecastHourly({ weatherData, temperatureUnit }) {
       <div className="mt-4 flex-1 overflow-y-auto">
         <div className="flex flex-col gap-4">
           {activeDayData?.map((data) => (
-            <HourlyWeatherCard
-              data={data}
-              key={data.time}
-              temperatureUnit={temperatureUnit}
-            />
+            <HourlyWeatherCard data={data} key={data.time} />
           ))}
         </div>
       </div>

@@ -8,7 +8,9 @@ import {
 
 function HourlyWeatherCard({ data }) {
   const isLoading = !data;
-  const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
+  const temperatureUnit = useSelector(
+    (state) => state.weatherUnits.temperatureUnit,
+  );
 
   if (isLoading)
     return (

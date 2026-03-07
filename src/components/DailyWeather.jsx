@@ -1,13 +1,16 @@
+import { useSelector } from "react-redux";
 import { getDailyWeatherObjectArr } from "../utils/helpers";
 import DailyForecastCard from "./DailyForecastCard";
 
-function DailyWeather({ weatherData }) {
+function DailyWeather() {
+  const { daily } = useSelector((state) => state.weatherData);
+
   const {
     temperature_2m_max: tempMax,
     temperature_2m_min: tempMin,
     weather_code: weatherCode,
     time,
-  } = weatherData || {};
+  } = daily;
 
   const dailyWeather = getDailyWeatherObjectArr(
     tempMax,

@@ -4,11 +4,11 @@ import {
   updateNextMetricSystem,
   updateUnitsToImperial,
   updateUnitsToMetric,
-} from "../slices/weatherSlice";
+} from "../slices/weatherUnitsSlice";
 
 function MenuItemSwitchAllUnits({ label }) {
   const previousMetricSystem = useSelector(
-    (state) => state.weather.nextMetricSystem,
+    (state) => state.weatherUnits.nextMetricSystem,
   );
   const dispatch = useDispatch();
 

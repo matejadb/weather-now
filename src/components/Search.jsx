@@ -1,40 +1,40 @@
 // import searchIcon from "../../public/images/icon-search.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function Search({ onSetLocation, onSetIsLoading, onSetErrorCity }) {
+function Search() {
   const [input, setInput] = useState("");
-  const [city, setCity] = useState("Berlin");
+  // const [city, setCity] = useState("Berlin");
 
   function handleSubmit(e) {
     e.preventDefault();
-    setCity(input);
+    // setCity(input);
   }
 
-  useEffect(() => {
-    async function fetchCityPosition() {
-      onSetIsLoading(true);
-      onSetErrorCity(false);
-      try {
-        if (city.length === 0) return;
-        const res = await fetch(
-          `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`,
-        );
+  // useEffect(() => {
+  //   async function fetchCityPosition() {
+  //     onSetIsLoading(true);
+  //     onSetErrorCity(false);
+  //     try {
+  //       if (city.length === 0) return;
+  //       const res = await fetch(
+  //         `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`,
+  //       );
 
-        const data = await res.json();
+  //       const data = await res.json();
 
-        if (!data.results) {
-          onSetErrorCity(true);
-          return;
-        }
+  //       if (!data.results) {
+  //         onSetErrorCity(true);
+  //         return;
+  //       }
 
-        onSetLocation(data.results[0]);
-      } catch (err) {
-        throw new Error(err.message);
-      }
-    }
+  //       onSetLocation(data.results[0]);
+  //     } catch (err) {
+  //       throw new Error(err.message);
+  //     }
+  //   }
 
-    fetchCityPosition();
-  }, [city, onSetIsLoading, onSetLocation]);
+  //   fetchCityPosition();
+  // }, [city, onSetIsLoading, onSetLocation, onSetErrorCity]);
 
   return (
     <form

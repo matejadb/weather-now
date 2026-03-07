@@ -2,7 +2,6 @@ import Location from "../ui/Location";
 import Temperature from "../ui/Temperature";
 import WeatherDetails from "../ui/WeatherDetails";
 import {
-  formatDate,
   formatPrecipitation,
   formatTemperature,
   formatWindSpeed,
@@ -10,41 +9,40 @@ import {
 } from "../utils/helpers";
 import { useSelector } from "react-redux";
 
-function CurrentWeather({ weatherData, name, country }) {
-  const location = `${name}, ${country}`;
-  const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
-  const windSpeedUnit = useSelector((state) => state.weather.windSpeedUnit);
+function CurrentWeather() {
+  const { current } = useSelector((state) => state.weatherData);
+
+  const temperatureUnit = useSelector(
+    (state) => state.weatherUnits.temperatureUnit,
+  );
+  const windSpeedUnit = useSelector(
+    (state) => state.weatherUnits.windSpeedUnit,
+  );
   const precipitationUnit = useSelector(
-    (state) => state.weather.precipitationUnit,
+    (state) => state.weatherUnits.precipitationUnit,
   );
 
-  const temperature = formatTemperature(
-    weatherData?.temperature_2m,
-    temperatureUnit,
-  );
-  const windSpeed = formatWindSpeed(weatherData?.wind_speed_10m, windSpeedUnit);
+  const windSpeed = formatWindSpeed(current?.wind_speed_10m, windSpeedUnit);
+
   const precipitation = formatPrecipitation(
-    weatherData?.precipitation,
+    current?.precipitation,
     precipitationUnit,
   );
 
   return (
     <div className="flex flex-col gap-5">
       <div className="flex h-71.5 flex-col gap-4 rounded-[20px] bg-[url('/images/bg-today-small.svg')] bg-cover bg-center bg-no-repeat px-6 py-10 md:flex-row md:items-center md:justify-between md:bg-[url('/images/bg-today-large.svg')] md:py-20">
-        <Location location={location} date={formatDate(weatherData?.time)} />
+        <Location />
 
-        <Temperature
-          icon={getWeatherIcon(weatherData?.weather_code)}
-          temperature={temperature}
-        />
+        <Temperature icon={getWeatherIcon(current?.weather_code)} />
       </div>
 
       <WeatherDetails
         feelsLike={formatTemperature(
-          weatherData?.apparent_temperature,
+          current?.apparent_temperature,
           temperatureUnit,
         )}
-        humidity={weatherData?.relative_humidity_2m}
+        humidity={current?.relative_humidity_2m}
         wind={windSpeed}
         precipitation={precipitation}
       />

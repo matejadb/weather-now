@@ -7,8 +7,8 @@ const initialState = {
   precipitationUnit: "Millimeters (mm)",
 };
 
-const weatherSlice = createSlice({
-  name: "weather",
+const weatherUnitsSlice = createSlice({
+  name: "weatherUnits",
   initialState,
   reducers: {
     updateNextMetricSystem(state, action) {
@@ -43,6 +43,6 @@ export const {
   updateTemperatureUnit,
   updateWindSpeedUnit,
   updatePrecipitationUnit,
-} = weatherSlice.actions;
+} = weatherUnitsSlice.actions;
 
-export default weatherSlice.reducer;
+export default weatherUnitsSlice.reducer;

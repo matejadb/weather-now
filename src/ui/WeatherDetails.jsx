@@ -8,8 +8,8 @@ function WeatherDetails({ feelsLike, humidity, wind, precipitation }) {
       <WeatherDetailsCard label="Wind" value={wind.value} unit={wind.unit} />
       <WeatherDetailsCard
         label="Precipitation"
-        value={precipitation.value}
-        unit={precipitation.unit}
+        value={precipitation?.value}
+        unit={precipitation?.unit}
       />
     </div>
   );
