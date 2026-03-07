@@ -53,7 +53,7 @@ export function getHourlyWeatherObjectArr(temp, time, weatherCode) {
 }
 
 export function formatTemperature(temp, unit) {
-  if (temp === null) return "";
+  if (!temp) return "";
   const selected = unit?.split(" ")[0].toLowerCase();
 
   if (selected === "fahrenheit") return Math.floor(temp * (9 / 5) + 32);
