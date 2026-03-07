@@ -1,5 +1,4 @@
 // import searchIcon from "../../public/images/icon-search.svg";
-
 import { useEffect, useState } from "react";
 
 function Search({ onSetLocation, onSetIsLoading, onSetErrorCity }) {

@@ -1,6 +1,6 @@
-import Location from "./Location";
-import Temperature from "./Temperature";
-import WeatherDetails from "./WeatherDetails";
+import Location from "../ui/Location";
+import Temperature from "../ui/Temperature";
+import WeatherDetails from "../ui/WeatherDetails";
 import {
   formatDate,
   formatPrecipitation,
@@ -10,14 +10,7 @@ import {
 } from "../utils/helpers";
 import { useSelector } from "react-redux";
 
-function CurrentWeather({
-  weatherData,
-  name,
-  country,
-  // temperatureUnit,
-  // windSpeedUnit,
-  // precipitationUnit,
-}) {
+function CurrentWeather({ weatherData, name, country }) {
   const location = `${name}, ${country}`;
   const temperatureUnit = useSelector((state) => state.weather.temperatureUnit);
   const windSpeedUnit = useSelector((state) => state.weather.windSpeedUnit);

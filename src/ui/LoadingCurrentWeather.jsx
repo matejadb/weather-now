@@ -1,4 +1,5 @@
 import { SyncLoader } from "react-spinners";
+
 import WeatherDetails from "./WeatherDetails";
 
 function LoadingCurrentWeather() {
@@ -11,8 +12,8 @@ function LoadingCurrentWeather() {
       <WeatherDetails
         feelsLike={"–"}
         humidity={"–"}
-        wind={"–"}
-        precipitation={"–"}
+        wind={{ value: "–", unit: "" }}
+        precipitation={{ value: "–", unit: "" }}
       />
     </div>
   );

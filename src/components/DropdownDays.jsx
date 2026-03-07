@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import iconArrowDown from "/images/icon-dropdown.svg";
-import MenuItem from "./MenuItem";
+import MenuItemSelectDay from "./MenuItemSelectDay";
 
 function DropdownDays({ days, activeDay, onSetSelectedDay }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +59,7 @@ function DropdownDays({ days, activeDay, onSetSelectedDay }) {
           role="menu"
         >
           {days.map((day) => (
-            <MenuItem
+            <MenuItemSelectDay
               label={day.dayLabel}
               key={day.dayLabel}
               onSetSelectedDay={onSetSelectedDay}

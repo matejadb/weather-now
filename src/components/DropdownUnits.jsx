@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+
 import iconCog from "/images/icon-units.svg";
 import iconArrowDown from "/images/icon-dropdown.svg";
-import MenuItem from "./MenuItem";
-import MenuGroup from "./MenuGroup";
-import { useSelector } from "react-redux";
+import MenuItem from "./MenuItemSelectUnit";
+import MenuGroup from "../ui/MenuGroup";
+import MenuItemSwitchAllUnits from "./MenuItemSwitchAllUnits";
+import MenuItemSelectUnit from "./MenuItemSelectUnit";
 
 function DropdownUnits() {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,15 +62,14 @@ function DropdownUnits() {
           className="absolute right-0 z-100 mt-2 flex w-53.5 origin-top-right flex-col gap-1 divide-y divide-neutral-600 rounded-xl border border-neutral-600 bg-neutral-800 px-2 py-1.5"
           role="menu"
         >
-          <MenuItem label={`Switch to ${nextMetricSystem}`} />
+          <MenuItemSwitchAllUnits label={`Switch to ${nextMetricSystem}`} />
 
           <MenuGroup groupLabel="Temperature">
             {temperatureUnits.map((unit) => (
-              <MenuItem
+              <MenuItemSelectUnit
                 key={unit}
                 label={unit}
                 unit={temperatureUnit}
-                // onSetUnit={dispatch(updateTemperatureUnit)}
                 type={"temperature"}
               />
             ))}
@@ -79,7 +81,6 @@ function DropdownUnits() {
                 key={unit}
                 label={unit}
                 unit={windSpeedUnit}
-                // onSetUnit={dispatch(updateWindSpeedUnit)}
                 type={"windSpeed"}
               />
             ))}
@@ -91,7 +92,6 @@ function DropdownUnits() {
                 key={unit}
                 label={unit}
                 unit={precipitationUnit}
-                // onSetUnit={dispatch(updatePrecipitationUnit)}
                 type={"precipitation"}
               />
             ))}

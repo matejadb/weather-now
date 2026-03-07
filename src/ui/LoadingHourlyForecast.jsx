@@ -1,5 +1,5 @@
-import DropdownDays from "./DropdownDays";
-import HourlyWeatherCard from "./HourlyWeatherCard";
+import DropdownDays from "../components/DropdownDays";
+import HourlyWeatherCard from "../components/HourlyWeatherCard";
 
 function LoadingHourlyForecast() {
   const hourlyForecast = Array.from({ length: 8 }, (_, index) => index);

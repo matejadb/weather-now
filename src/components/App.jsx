@@ -5,14 +5,14 @@ import DailyWeather from "./DailyWeather";
 import DropdownUnits from "./DropdownUnits";
 import ForecastHourly from "./ForecastHourly";
 import ForecastMain from "../ui/ForecastMain";
-import Header from "./Header";
+import Header from "../ui/Header";
 import Main from "../ui/Main";
 import Search from "./Search";
 import Slogan from "../ui/Slogan";
 import WeatherForecast from "../ui/WeatherForecast";
-import LoadingCurrentWeather from "./LoadingCurrentWeather";
-import LoadingDailyWeather from "./LoadingDailyWeather";
-import LoadingHourlyForecast from "./LoadingHourlyForecast";
+import LoadingCurrentWeather from "../ui/LoadingCurrentWeather";
+import LoadingDailyWeather from "../ui/LoadingDailyWeather";
+import LoadingHourlyForecast from "../ui/LoadingHourlyForecast";
 import NoSearchResults from "../ui/NoSearchResults";
 
 function App() {

@@ -1,4 +1,4 @@
-import DailyForecastCard from "./DailyForecastCard";
+import DailyForecastCard from "../components/DailyForecastCard";
 
 function LoadingDailyWeather() {
   const dailyWeather = Array.from({ length: 7 }, (_, index) => index);
