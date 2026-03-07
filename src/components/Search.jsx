@@ -1,40 +1,17 @@
 // import searchIcon from "../../public/images/icon-search.svg";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateSearchQuery } from "../slices/weatherDataSlice";
 
 function Search() {
   const [input, setInput] = useState("");
-  // const [city, setCity] = useState("Berlin");
+
+  const dispatch = useDispatch();
 
   function handleSubmit(e) {
     e.preventDefault();
-    // setCity(input);
+    dispatch(updateSearchQuery(input));
   }
-
-  // useEffect(() => {
-  //   async function fetchCityPosition() {
-  //     onSetIsLoading(true);
-  //     onSetErrorCity(false);
-  //     try {
-  //       if (city.length === 0) return;
-  //       const res = await fetch(
-  //         `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`,
-  //       );
-
-  //       const data = await res.json();
-
-  //       if (!data.results) {
-  //         onSetErrorCity(true);
-  //         return;
-  //       }
-
-  //       onSetLocation(data.results[0]);
-  //     } catch (err) {
-  //       throw new Error(err.message);
-  //     }
-  //   }
-
-  //   fetchCityPosition();
-  // }, [city, onSetIsLoading, onSetLocation, onSetErrorCity]);
 
   return (
     <form

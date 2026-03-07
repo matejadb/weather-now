@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getCityName } from "../services/apiGeocoding";
+import { getCityName, getCityPosition } from "../services/apiGeocoding";
 
 function getPosition() {
   return new Promise(function (resolve, reject) {
@@ -9,17 +9,29 @@ function getPosition() {
 
 export const fetchLocation = createAsyncThunk(
   "weatherData/fetchLocation",
-  async function () {
-    const positionObj = await getPosition();
-    const position = {
-      latitude: positionObj.coords.latitude,
-      longitude: positionObj.coords.longitude,
-    };
+  async function (query) {
+    if (!query) {
+      const positionObj = await getPosition();
+      const position = {
+        latitude: positionObj.coords.latitude,
+        longitude: positionObj.coords.longitude,
+      };
 
-    const locationObj = await getCityName(position);
-    const location = `${locationObj?.city}, ${locationObj.countryName}`;
+      const locationObj = await getCityName(position);
+      const location = `${locationObj?.city}, ${locationObj.countryName}`;
 
-    return { position, location };
+      return { position, location };
+    } else {
+      const positionObj = await getCityPosition(query);
+      const position = {
+        latitude: positionObj.results[0].latitude,
+        longitude: positionObj.results[0].longitude,
+      };
+
+      const location = `${positionObj.results[0].name}, ${positionObj.results[0].country}`;
+
+      return { position, location };
+    }
   },
 );
 
@@ -29,6 +41,9 @@ export const fetchWeather = createAsyncThunk(
     const res = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${position.latitude}&longitude=${position.longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,wind_speed_10m,precipitation,relative_humidity_2m,apparent_temperature`,
     );
+
+    if (!res.ok) throw new Error("bad request");
+
     const data = await res.json();
 
     return data;
@@ -52,6 +67,7 @@ const weatherDataSlice = createSlice({
   reducers: {
     updateSearchQuery(state, action) {
       state.searchQuery = action.payload;
+      state.error = "";
     },
   },
   extraReducers: (builder) =>
@@ -62,7 +78,7 @@ const weatherDataSlice = createSlice({
       .addCase(fetchLocation.fulfilled, (state, action) => {
         state.location = action.payload.location;
         state.position = action.payload.position;
-        state.status = "idle";
+        state.status = "loading";
       })
       .addCase(fetchLocation.rejected, (state, action) => {
         state.error = action.error.message;
@@ -83,5 +99,7 @@ const weatherDataSlice = createSlice({
         state.status = "error";
       }),
 });
+
+export const { updateSearchQuery } = weatherDataSlice.actions;
 
 export default weatherDataSlice.reducer;
