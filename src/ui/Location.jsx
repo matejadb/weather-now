@@ -10,7 +10,7 @@ function Location() {
         {location}
       </h1>
       <p className="text-neutral-0 font-sans text-[18px] leading-[1.2] font-medium opacity-80">
-        {formatDate(current.time)}
+        {formatDate(current?.time)}
       </p>
     </div>
   );

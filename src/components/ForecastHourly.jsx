@@ -8,6 +8,9 @@ import HourlyWeatherCard from "./HourlyWeatherCard";
 
 function ForecastHourly() {
   const { hourly } = useSelector((state) => state.weatherData);
+  const [selectedDay, setSelectedDay] = useState(null);
+
+  if (!hourly) return null;
 
   const {
     temperature_2m: temperature,
@@ -16,8 +19,6 @@ function ForecastHourly() {
   } = hourly;
 
   const groupedDays = getHourlyWeatherObjectArr(temperature, time, weatherCode);
-
-  const [selectedDay, setSelectedDay] = useState(null);
 
   const activeDay = selectedDay || groupedDays[0]?.dayLabel;
 

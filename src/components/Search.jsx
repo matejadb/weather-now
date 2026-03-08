@@ -1,7 +1,7 @@
 // import searchIcon from "../../public/images/icon-search.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateSearchQuery } from "../slices/weatherDataSlice";
+import { updateSearchQuery } from "../redux/weatherDataSlice";
 
 function Search() {
   const [input, setInput] = useState("");

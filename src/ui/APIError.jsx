@@ -5,7 +5,7 @@ import {
   fetchLocation,
   fetchWeather,
   updateSearchQuery,
-} from "../slices/weatherDataSlice";
+} from "../redux/weatherDataSlice";
 
 function APIError() {
   const dispatch = useDispatch();

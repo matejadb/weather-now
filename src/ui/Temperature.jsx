@@ -6,7 +6,7 @@ function Temperature({ icon }) {
   const { current } = useSelector((state) => state.weatherData);
 
   const temperature = formatTemperature(
-    current.temperature_2m,
+    current?.temperature_2m,
     temperatureUnit,
   );
 

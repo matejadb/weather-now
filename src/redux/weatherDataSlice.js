@@ -1,6 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getCityName, getCityPosition } from "../services/apiGeocoding";
 
+const FALLBACK_LOCATION = {
+  position: {
+    latitude: 52.52437,
+    longitude: 13.41053,
+  },
+  location: "Berlin, Germany",
+};
+
 function getPosition() {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -9,29 +17,40 @@ function getPosition() {
 
 export const fetchLocation = createAsyncThunk(
   "weatherData/fetchLocation",
-  async function (query) {
+  async function (query, thunkAPI) {
+    let position;
+    let location;
+
     if (!query) {
       const positionObj = await getPosition();
-      const position = {
+
+      if (!positionObj) throw new Error("no results");
+
+      position = {
         latitude: positionObj.coords.latitude,
         longitude: positionObj.coords.longitude,
       };
 
       const locationObj = await getCityName(position);
-      const location = `${locationObj?.city}, ${locationObj.countryName}`;
-
-      return { position, location };
+      location = `${locationObj?.city}, ${locationObj.countryName}`;
     } else {
       const positionObj = await getCityPosition(query);
-      const position = {
+
+      if (!positionObj.results?.length) {
+        throw new Error("no results");
+      }
+
+      position = {
         latitude: positionObj.results[0].latitude,
         longitude: positionObj.results[0].longitude,
       };
 
-      const location = `${positionObj.results[0].name}, ${positionObj.results[0].country}`;
-
-      return { position, location };
+      location = `${positionObj.results[0].name}, ${positionObj.results[0].country}`;
     }
+
+    thunkAPI.dispatch(fetchWeather(position));
+
+    return { position, location };
   },
 );
 
@@ -51,9 +70,9 @@ export const fetchWeather = createAsyncThunk(
 );
 
 const initialState = {
-  current: {},
-  daily: {},
-  hourly: {},
+  current: null,
+  daily: null,
+  hourly: null,
   status: "idle",
   error: "",
   location: "",
@@ -67,21 +86,22 @@ const weatherDataSlice = createSlice({
   reducers: {
     updateSearchQuery(state, action) {
       state.searchQuery = action.payload;
-      state.error = "";
     },
   },
   extraReducers: (builder) =>
     builder
       .addCase(fetchLocation.pending, (state) => {
         state.status = "loading";
+        state.error = "";
       })
       .addCase(fetchLocation.fulfilled, (state, action) => {
         state.location = action.payload.location;
         state.position = action.payload.position;
-        state.status = "loading";
+        state.status = "idle";
       })
-      .addCase(fetchLocation.rejected, (state) => {
-        state.searchQuery = "Berlin";
+      .addCase(fetchLocation.rejected, (state, action) => {
+        state.error = action.error.message || "User denied Geolocation";
+        state.status = "error";
       })
 
       .addCase(fetchWeather.pending, (state) => {

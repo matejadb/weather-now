@@ -4,7 +4,7 @@ import {
   updatePrecipitationUnit,
   updateTemperatureUnit,
   updateWindSpeedUnit,
-} from "../slices/weatherUnitsSlice";
+} from "../redux/weatherUnitsSlice";
 
 function MenuItemSelectUnit({ label, unit, type }) {
   const dispatch = useDispatch();

@@ -5,6 +5,8 @@ import DailyForecastCard from "./DailyForecastCard";
 function DailyWeather() {
   const { daily } = useSelector((state) => state.weatherData);
 
+  if (!daily) return null;
+
   const {
     temperature_2m_max: tempMax,
     temperature_2m_min: tempMin,

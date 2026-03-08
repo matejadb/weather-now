@@ -4,7 +4,7 @@ import {
   updateNextMetricSystem,
   updateUnitsToImperial,
   updateUnitsToMetric,
-} from "../slices/weatherUnitsSlice";
+} from "../redux/weatherUnitsSlice";
 
 function MenuItemSwitchAllUnits({ label }) {
   const previousMetricSystem = useSelector(

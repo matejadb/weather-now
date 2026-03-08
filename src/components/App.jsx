@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchLocation, fetchWeather } from "../slices/weatherDataSlice";
+import { fetchLocation } from "../redux/weatherDataSlice";
 
 import CurrentWeather from "./CurrentWeather";
 import DailyWeather from "./DailyWeather";
 import DropdownUnits from "./DropdownUnits";
 import ForecastHourly from "./ForecastHourly";
+
 import ForecastMain from "../ui/ForecastMain";
 import Header from "../ui/Header";
 import Main from "../ui/Main";
@@ -21,19 +22,13 @@ import APIError from "../ui/APIError";
 
 function App() {
   const dispatch = useDispatch();
-  const { position, status, error, searchQuery } = useSelector(
+  const { status, error, searchQuery } = useSelector(
     (state) => state.weatherData,
   );
 
   useEffect(() => {
     dispatch(fetchLocation(searchQuery));
   }, [dispatch, searchQuery]);
-
-  useEffect(() => {
-    if (!position) return;
-
-    dispatch(fetchWeather(position));
-  }, [position, dispatch]);
 
   return (
     <div className="flex min-h-screen flex-col gap-12 bg-neutral-900 px-4 pt-4 pb-12 md:px-6 md:pt-6 md:pb-20 lg:gap-16 lg:px-28 lg:pt-12">
@@ -49,7 +44,7 @@ function App() {
         ) : (
           <>
             <Search />
-            {error && <NoSearchResults />}
+            {error && <NoSearchResults message={error} />}
             {!error && (
               <WeatherForecast>
                 <ForecastMain>
